@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './TrackList.css';
 
 import Track from '../Track/Track';
+import SearchResults from '../SearchResults/SearchResults';
 
 class TrackList extends React.Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class TrackList extends React.Component {
   render() {
     return (
       <div className="TrackList">
-        {this.props.tracks.map(track => (
-          <Track key={track.id} />
-        ))}
+        {this.props.tracks.map(track => {
+          return <Track key={track.id} name={track.name} album={track.album} artist={track.artist} />;
+        })}
       </div>
     )
   }

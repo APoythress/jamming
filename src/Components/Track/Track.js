@@ -1,8 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Track.css';
 
+import SearchResults from '../SearchResults/SearchResults';
+import TrackList from '../TrackList/TrackList';
+
 class Track extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   renderAction() {
     if (Track.isRemoval === true) {
       return <a className="Track-action">'-'</a>
@@ -15,8 +21,8 @@ class Track extends React.Component {
     return (
       <div className="Track">
         <div className="Track-information">
-          <h3> {/*<!-- track name will go here --> */} </h3>
-          <p>{/* <!-- track artist will go here--> | <!-- track album will go here --> */}</p>
+          <h3>{this.props.name}</h3>
+          <p>{this.props.artist} | {this.props.album}</p>
         </div>
         <a className="Track-action">{/* <!-- + or - will go here --> */}</a>
       </div>
