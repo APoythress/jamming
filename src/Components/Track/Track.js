@@ -7,14 +7,19 @@ import TrackList from '../TrackList/TrackList';
 class Track extends React.Component {
   constructor(props) {
     super(props);
+    this.addTrack = this.addTrack.bind(this);
   }
 
   renderAction() {
     if (Track.isRemoval === true) {
       return <a className="Track-action">'-'</a>
     } else {
-      return <a className="Track-action">'+'</a>
+      return <a className="Track-action" onClick={this.addTrack} >'+'</a>
     }
+  }
+
+  addTrack() {
+    this.props.onAdd = this.props.track;
   }
 
   render() {

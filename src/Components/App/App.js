@@ -24,7 +24,7 @@ class App extends React.Component {
         id: 'id 2'
       }
     ],
-    playlist: 'Playlist Name Here',
+    playlistName: 'Playlist Name Here',
     playlistTracks: [
     {
       name: 'Plist song 2',
@@ -43,10 +43,10 @@ class App extends React.Component {
   }
 
   addTrack(track) {
-    this.addTrack = this.addTrack.bind(this);
     if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     }
+    this.addTrack = this.addTrack.bind(this);
   }
 
   render() {
