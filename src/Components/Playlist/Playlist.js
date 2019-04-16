@@ -11,8 +11,8 @@ class Playlist extends React.Component {
   }
 
   handleNameChange(event) {
-    let newName = event.target.value;
-    this.props.onNameChange(newName);
+    //let newName = event.target.value;
+    this.props.onNameChange( {newName: event.target.value} );
   }
 
   render() {

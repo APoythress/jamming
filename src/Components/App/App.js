@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      SearchResults: [],
+      searchResults: [],
       playlistName: 'Playlist Name Here',
       playlistTracks: []
     };
@@ -32,15 +32,17 @@ class App extends React.Component {
   }
 
   addTrack(track) {
-    if (this.state.playlistTracks.find(playlistTrack => playlistTrack.id === track.id)) {
-      return;
-    }
+    let tracks = this.state.playlistTracks;
+    tracks.push(track);
+
+    this.setState({playlistTracks: tracks});
   }
 
   removeTrack(track) {
-    if (this.state.playlistTracks.find(playlistTrack => playlistTrack.id === track.id)) {
-      return;
-    }
+    let tracks = this.state.playlistTracks;
+    tracks = tracks.filter(playlistTrack => playlistTrack.id !== track.id);
+
+    this.setState({playlistTracks: tracks});
   }
 
   updatePlaylistName(name) {
@@ -48,15 +50,14 @@ class App extends React.Component {
   }
 
   savePlaylist() {
-    const trackURIs = this.state.playlistTracks.map(track => track.uri);
-    Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
-      this.setState({
-        playlistName: 'New Playlist',
-        playlistTracks: []
-      });
+  const trackUris = this.state.playlistTracks.map(track => track.uri);
+  Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
+    this.setState({
+      playlistName: 'New Playlist',
+      playlistTracks: []
     });
-  }
-
+  });
+}
 
 
   render() {
@@ -66,10 +67,14 @@ class App extends React.Component {
         <div className="App">
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.SearchResults} onAdd={this.addTrack} />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
             {/* What is the difference between calling this.state and this.Component?
                 I am struggling to understand when to use .state and when to simply call the Component. */}
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} />
+            <Playlist playlistName={this.state.playlistName}
+                      playlistTracks={this.state.playlistTracks}
+                      onRemove={this.removeTrack}
+                      onNameChange={this.updatePlaylistName}
+                      onSave={this.savePlaylist} />
           </div>
         </div>
       </div>

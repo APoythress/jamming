@@ -1,4 +1,4 @@
-const redirectURI = 'http://localhost:3000/';
+const redirectURI = 'http://jamming_react.surge.sh/';
 const clientId = 'b5b7ea26855d4e588f9a646668f15cd7';
 
 let accessToken;
@@ -47,8 +47,8 @@ const Spotify = {
       });
     },
 
-  savePlaylist(name, trackURIs) {
-    if (!name || !trackURIs.length) {
+  savePlaylist(name, trackUris) {
+    if (!name || !trackUris.length) {
       return;
     }
 
@@ -72,7 +72,7 @@ const Spotify = {
         return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
           headers: headers,
           method: 'POST',
-          body: JSON.stringify({uris: trackURIs})
+          body: JSON.stringify({uris: trackUris})
         });
       });
     });
